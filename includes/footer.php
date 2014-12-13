@@ -19,7 +19,7 @@
     NProgress.start();
 
     <?php if(Session::get('note') != '' && Session::get('note_type') != ''): ?>
-        var n = noty({text: '<?= Session::get("note") ?>', layout: 'top', type: '<?= Session::get("note_type") ?>', template: '<div class="noty_message"><span class="noty_text"></span><div class="noty_close"></div></div>', closeWith: ['button'], timeout:20000 });
+        var n = noty({text: '<?= Session::get("note") ?>', layout: 'top', type: '<?= Session::get("note_type") ?>', template: '<div class="noty_message"><span class="noty_text"></span><div class="noty_close"></div></div>', closeWith: ['button'], timeout:1600 });
         <?php Session::forget('note');
               Session::forget('note_type');
         ?>

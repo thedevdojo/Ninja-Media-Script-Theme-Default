@@ -47,11 +47,7 @@
 
 			<?php endif; ?>
 			
-			<?php if(isset($settings->square_ad) && !empty($settings->square_ad)): ?>
-				<?= json_decode($settings->square_ad) ?>
-			<?php else: ?>
-				<img src="http://placehold.it/300x250&text=Advertisement" style='position:relative; left:1px; width:100%; overflow:hidden' />
-			<?php endif; ?>
+			<?php include(dirname(__FILE__).'/../ads/sidebar-ad.php'); ?>
 		</div>
 	</div>
 </div>
