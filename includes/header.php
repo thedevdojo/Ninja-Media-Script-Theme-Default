@@ -71,6 +71,7 @@
 
                 <?php $user_profile = ''; ?>
                 <?php if(isset($user->username)): $user_profile = $user; endif; ?>
+
                 <?php $user = Auth::user(); ?>
                 <?php $user_points = DB::table('points')->where('user_id', '=', $user->id)->sum('points'); ?>
                 <a href="<?= URL::to('user') . '/' . $user->username; ?>" class="usr-avatar"><img src="<?= Config::get('site.uploads_dir') ?>/avatars/<?= $user->avatar ?>" alt="<?= $user->username ?>" class="img-circle user-avatar-large"></a>
