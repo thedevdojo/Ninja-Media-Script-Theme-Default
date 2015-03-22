@@ -2,8 +2,8 @@
 <html>
 <head>
     <?php $settings = Setting::first(); ?>
-    <?php if(isset($media->title)): ?>
-      <title>{{ stripslashes($media->title) }}</title>
+    <?php if(isset($item->title)): ?>
+      <title><?= stripslashes($item->title) ?></title>
     <?php else: ?>
       <title><?= $settings->website_name ?> - <?= $settings->website_description ?></title>
     <?php endif; ?>
@@ -33,16 +33,16 @@
     <script type="text/javascript" src="<?= URL::to('/') ?>/content/themes/default/assets/js/jquery.timeago.js"></script>
 
     <?php if(isset($item->title) && isset($item->pic_url)): ?>
-      <meta property="og:title" content="<?= $item->title ?>"/>
+      <meta property="og:title" content="<?= stripslashes($item->title) ?>"/>
       <meta property="og:url" content="<?= Request::url() ?>"/>
       <meta property="og:image" content="<?= Config::get('site.uploads_dir') . '/images/' . $item->pic_url ?>"/>
-      <meta property="og:type" content="website" />
+      <meta property="og:type" content="article" />
 
         <?php if(isset($item->description)): ?>
           <meta property="og:description" content="<?= $item->description ?>"/>
         <?php endif; ?>
 
-      <meta itemprop="name" content="<?= $item->title ?>">
+      <meta itemprop="name" content="<?= stripslashes($item->title) ?>">
       <meta itemprop="description" content="<?= $item->description ?>">
       <meta itemprop="image" content="<?= Config::get('site.uploads_dir') . '/images/' . $item->pic_url ?>">
     <?php endif; ?>
