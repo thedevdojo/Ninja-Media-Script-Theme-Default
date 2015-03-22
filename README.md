@@ -4,4 +4,4 @@
 
 <img src="http://1.s3.envato.com/files/84197687/inline-preview.jpg" />
 
-This is the defaul theme for Ninja Media Script
+This is the default theme for Ninja Media Script
