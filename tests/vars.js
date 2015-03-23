@@ -1,0 +1,1 @@
+var domain = 'http://ninja-media-script.devdojo.com';
