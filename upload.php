@@ -83,7 +83,16 @@
 
 </div>
 
+<script type="text/javascript" src="<?= URL::to('/') ?>/content/themes/default/assets/js/tinymce/tinymce.min.js"></script>
 <script type="text/javascript" src="<?= URL::to('/') ?>/content/themes/default/assets/js/tagsinput/jquery.tagsinput.js"></script>
+
+<?php if($settings->media_description): ?>
+    <script type="text/javascript">
+    tinymce.init({
+        selector: "#description"
+     });
+    </script>
+<?php endif; ?>
 
 <script type="text/javascript">
 

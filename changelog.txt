@@ -10,3 +10,10 @@
 --------------------------------------------------
 
 - Fixed fb image sharing and SEO title for Images
+
+--------------------------------------------------
+	1.0.3 - 03-22-2015
+--------------------------------------------------
+
+- Added WYSIWYG Editor to description if it is enabled
+- Fixed viewing user profile page error when user is not logged in

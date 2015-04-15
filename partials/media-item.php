@@ -16,7 +16,7 @@
 		<a href="<?= $user_url ?>"><img src="<?= $user_avatar ?>" class="img-circle user-avatar-medium" /></a><h2 class="item-title"><a href="<?= URL::to('media') . '/' . $item->slug; ?>" alt="<?= $item->title ?>"><?= stripslashes($item->title) ?></a></h2>
 		<div class="item-details">
 			<p class="details"><?= Lang::get('lang.submitted_by') ?>: <a href="<?= $user_url ?>"><?= $username?></a> <?= Lang::get('lang.submitted_on') ?> <?= date("F j, Y", strtotime($item->created_at)) ?></p>
-			<p class="home-like-count"><i class="fa <?= $settings->like_icon ?>"></i> <span><?= count($item->media_likes) ?></span></p>
+			<p class="home-like-count"><i class="fa <?= $settings->like_icon ?>"></i> <span><?= $item->totalLikes() ?></span></p>
 			<p class="home-comment-count"><i class="fa fa-comments"></i> <?= count($item->comments) ?></p>
 			<p class="home-view-count"><i class="fa fa-eye"></i> <?php if(isset($view_increment) && $view_increment == true ): ?><?= $item->views + 1 ?><?php else: ?><?= $item->views ?><?php endif; ?> </p>
 		</div>
