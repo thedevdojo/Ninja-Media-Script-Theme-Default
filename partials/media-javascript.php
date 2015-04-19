@@ -259,7 +259,7 @@
 
 	function delete_comment(id){
 		$.ajax({
-			url:"<?= URL::to('comments') ?>"+id, 
+			url:"<?= URL::to('comments') ?>/"+id, 
 			type: 'POST',
 		 	data: { _method:'DELETE' }, 
 		 	success: function(data){

@@ -1,5 +1,11 @@
 <div class="col-md-4 col-lg-4" id="sidebar_container">
 	<div id="sidebar_inner" class="profile-container">
+
+		<?php
+		if(isset($is_user_profile) && $is_user_profile){
+		 $user = $user_profile;
+		}
+		?>
 		
 		<?php if(!Auth::guest() && Auth::user()->id == $user->id): ?>
 			<?php 

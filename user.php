@@ -27,7 +27,14 @@
 	</style>
 <?php endif; ?>
 
-	<?php $user_points = DB::table('points')->where('user_id', '=', $user->id)->sum('points'); ?>
+	<?php 
+		if(isset($user_profile)){
+			$user_points = DB::table('points')->where('user_id', '=', $user_profile->id)->sum('points');
+		}else {
+			$user_points = DB::table('points')->where('user_id', '=', $user->id)->sum('points'); 
+
+		}
+		?>
 	<?php include('partials/profile-mobile.php'); ?>
 
 <div class="container main_home_container">

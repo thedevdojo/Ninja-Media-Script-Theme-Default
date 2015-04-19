@@ -1,3 +1,8 @@
+<?php
+if(isset($is_user_profile) && $is_user_profile){
+ $user = $user_profile;
+}
+?>
 <?php $user_points = DB::table('points')->where('user_id', '=', $user->id)->sum('points'); ?>
 <div class="col-md-8 col-lg-8" style="padding:0px;">
 	<h2><i class="icon-star"></i> <?= Lang::get('lang.user_points', array('username' => $user->username)) ?></h2>
