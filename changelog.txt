@@ -24,3 +24,7 @@
 
 - Fixed issue where users were not able to delete their own comments
 - Fixed issue where user was seeing their points when viewing a profile when logged in
+
+1.0.5
+
+- Fixed issue where description was not showing with HTML decoded from editor. Changed line 104 from <p class="media_description"><i class="fa fa-quote-left"></i> <?= $item->description ?></p> to <p class="media_description"><?= html_entity_decode($item->description) ?></p> in partials/media-item.php

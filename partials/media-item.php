@@ -101,6 +101,6 @@
 	<!-- end NSFW IF -->
 
 	<?php if($settings->media_description && isset($item->description) && !empty($item->description)): ?>
-		<p class="media_description"><i class="fa fa-quote-left"></i> <?= $item->description ?></p>
+		<p class="media_description"><?= html_entity_decode($item->description) ?></p>
 	<?php endif; ?>
 </div><!-- item-large -->
