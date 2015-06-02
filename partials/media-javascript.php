@@ -248,6 +248,7 @@
 	}
 
 	function clear_comment_fields(){
+		console.log('testclear');
 		$('#comment').val('');
 		$('#file_upload').show();
 

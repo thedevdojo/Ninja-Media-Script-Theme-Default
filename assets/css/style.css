@@ -54,7 +54,44 @@ h2 a:hover{
 body.modal-open{
 	margin-right:0px;
 }
-
+/************* Upload Multiple Image ***************/
+#upload_multiple_image{
+	padding-left:100px; 
+	background:#f1f1f1; 
+	padding:15px; 
+	margin-top:15px; 
+	margin-bottom:15px;
+}
+#upload_multiple_image>div{
+	padding: 30px 0;
+	border: 3px dotted #DDDDDD;
+	position: relative;
+}
+#upload_multiple_image>div>span{
+	width: 100%;
+	display: inline-block;
+	text-align: center;
+	position: absolute;
+	top: 18px;
+	z-index: 99;
+}
+#upload_multiple_image>div>#pic_url_multi{
+	position: absolute;
+	z-index: 999;
+	top: 18px;
+	opacity: 0;
+	width: 100%;
+}
+#selectedFiles{
+	margin-top: 25px;
+	width: 100%; 
+}
+#selectedFiles img {
+	max-width: 125px;
+	max-height: 125px;
+	float: left;
+	margin-bottom:10px;
+}
 .navbar-fixed-top{
 	box-shadow: 0 0 0px 0px rgba(0,0,0,.3);
 	-moz-box-shadow: 0 0 0px 0px rgba(0,0,0,.7);
@@ -77,9 +114,6 @@ body.modal-open{
 	padding-top:8px;
 	margin-right:15px;
 }
-
-
-
 
 .nav>li>a, .navbar .navbar-nav>.active>a{
 	padding:15px 12px;

@@ -15,7 +15,12 @@
     }, function(){
         $(this).removeClass('open');
     });
-
+    $('.dropdownNotifi').hover(function(){
+        $(this).removeClass('open');
+    });
+    $('.dropdownNotifi a').click(function(){
+        $(this).parent().find('.dropdown-menu').toggle();
+    });
     NProgress.start();
 
     <?php if(Session::get('note') != '' && Session::get('note_type') != ''): ?>

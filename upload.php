@@ -30,14 +30,21 @@
                     <option value="<?= $category->id ?>"><?= $category->name ?></option>
                 <?php endforeach; ?>
             </select>
-            
            
             <div style="clear:both"></div>
             <div id="img_upload" style="padding-left:100px; background:#f1f1f1; padding:15px; margin-top:15px; margin-bottom:15px;">
                 <i class="fa fa-picture-o" style="font-size:50px; color:#aaa; float:left"></i>
-                <p style="margin-left:65px; margin-bottom:6px;"><input type="file" multiple="true" id="pic_url" name="pic_url" style="" /></p>
+                <p style="margin-left:65px; margin-bottom:6px;"><input type="file" multiple="true" id="pic_url" name="pic_url[]"/></p>
                 <h4 style="margin-left:65px; padding-top:0px;"><?= Lang::get('lang.or_enter_url') ?></h4>
                 <p><input type="text" class="form-control" id="img_url" name="img_url" style="" placeholder="<?= Lang::get('lang.image_url') ?>" /></p> 
+            </div>
+
+            <div id="upload_multiple_image">
+                <div>
+                    <span>+ Add Another Image</span>
+                    <input type="file" multiple="true" id="pic_url_multi" accept="image/*" name="pic_url[]"/>
+                    <div id="selectedFiles"></div>
+                </div>
             </div>
 
             <div id="vid_upload" style="display:none; padding-left:100px; background:#f1f1f1; padding:15px; margin-top:15px; margin-bottom:15px;">
@@ -66,8 +73,6 @@
             </p>
 
             <input class="btn btn-color submit-media" type="submit" value="<?= Lang::get('lang.submit') ?>">
-
-
 
         </form>
 
@@ -130,9 +135,34 @@
         $('.submit-media').click(function(){
             $('#media-form').submit();
         });
+
+        //Multiple Image Upload
+        var selDiv = "";
+        document.addEventListener("DOMContentLoaded", init, false);
+        function init() {
+            document.querySelector('#pic_url_multi').addEventListener('change', handleFileSelect, false);
+            selDiv = document.querySelector("#selectedFiles");
+        }
+        function handleFileSelect(e) {
+            if(!e.target.files || !window.FileReader) return;
+            selDiv.innerHTML = "";
+            var files = e.target.files;
+            var filesArr = Array.prototype.slice.call(files);
+            filesArr.forEach(function(f) {
+                var f = files[i];
+                if(!f.type.match("image.*")) {
+                    return;
+                }
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var html = "<img src=\"" + e.target.result + "\">" + f.name + "<br clear=\"left\"/>";
+                    selDiv.innerHTML += html;               
+                }
+                reader.readAsDataURL(f); 
+            });
+        }
     });
 
 </script>
-
 
 <?php include('includes/footer.php'); ?>

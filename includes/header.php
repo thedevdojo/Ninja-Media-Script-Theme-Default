@@ -91,11 +91,11 @@
                   <li><a href="<?= URL::to('popular/year') ?>"><?= Lang::get('lang.for_the_year') ?></a></li>
                   <li><a href="<?= URL::to('popular') ?>"><?= Lang::get('lang.all_time') ?></a></li>
                 </ul>
-              </li>
+               </li>
               
-              <?php $categories = Category::orderBy('order', 'ASC')->get(); ?>
+               <?php $categories = Category::orderBy('order', 'ASC')->get(); ?>
 
-              <li class="dropdown">
+               <li class="dropdown">
                   <a href="#" class="dropdown-toggle categories" data-toggle="dropdown"><i class="fa fa-folder-open"></i> <?= Lang::get('lang.categories') ?> <b class="caret"></b></a>
                   
                   <ul class="dropdown-menu">
@@ -105,10 +105,10 @@
                           <?php endforeach; ?>
                       </li>
                     </ul>
-             </li>
+              </li>
 
-             <?php if($settings->pages_in_menu): ?>
-             <li class="dropdown <?php if(Request::is('pages/*') || Request::is('pages')){ echo 'active'; } ?>">
+              <?php if($settings->pages_in_menu): ?>
+              <li class="dropdown <?php if(Request::is('pages/*') || Request::is('pages')){ echo 'active'; } ?>">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-file-text"></i> <?= $settings->pages_in_menu_text ?> <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <?php $pages = Page::all(); ?>
@@ -120,16 +120,16 @@
               </li>
               <?php endif; ?>
 
-             <li><a href="<?= URL::to('/random') ?>"><i class="fa fa-random"></i> <?= Lang::get('lang.random') ?></a></li>
+              <li><a href="<?= URL::to('/random') ?>"><i class="fa fa-random"></i> <?= Lang::get('lang.random') ?></a></li>
 
-          </ul>
+             </ul>
 
           <!-- END MOBILE NAV -->
 
 
 
         <ul class="nav navbar-nav navbar-right">
-        <?php if(Auth::guest()): ?>
+          <?php if(Auth::guest()): ?>
         
         
             <li class="<?php if(Request::is('login')){ echo 'active'; } ?>"><a href="<?= URL::to('login') ?>"><?= Lang::get('lang.sign_in') ?></a></li>
@@ -138,31 +138,28 @@
               <li class="<?php if(Request::is('signup')){ echo 'active'; } ?>"><a href="<?= URL::to('signup') ?>"><?= Lang::get('lang.sign_up') ?></a></li>
             <?php endif; ?>
 
-        <?php else: ?>
+          <?php else: ?>
 
-        <?php $user_points = DB::table('points')->where('user_id', '=', Auth::user()->id)->sum('points'); ?>
+          <?php $user_points = DB::table('points')->where('user_id', '=', Auth::user()->id)->sum('points'); ?>
 
           <li class="dropdown">
-              <a href="#" class="user-menu dropdown-toggle" data-toggle="dropdown"><b class="caret"></b><div id="user-info"><h4><i class="fa fa-gear"></i> <?= Lang::get('lang.settings') ?></h4></div> </a>
-              <ul class="dropdown-menu">
-                <?php if(Auth::user()->admin): ?>
-                  <li><a href="<?= URL::to('admin') ?>" class="admin_link_mobile"><i class="fa fa-coffee"></i> <?= Lang::get('lang.admin') ?></a></li>
-                <?php endif; ?>
-                <li><a href="<?= URL::to('user') . '/' . Auth::user()->username; ?>"><i class="fa fa-user"></i> <?= Lang::get('lang.my_profile') ?></a></li>
-                <li><a href="<?= URL::to('logout') ?>" id="user_logout_mobile"><i class="fa fa-power-off"></i> <?= Lang::get('lang.logout') ?></a></li>
-              </ul>
-            </li>
-
-        <?php endif; ?>
-            <?php if($settings->user_registration || !Auth::guest()): ?>
-              <li><a href="<?= URL::to('upload') ?>" class="upload-btn"><i class="fa fa-cloud-upload"></i> <?= Lang::get('lang.upload') ?></a></li>
-            <?php endif; ?>
-          </ul>
-
+            <a href="#" class="user-menu dropdown-toggle" data-toggle="dropdown"><b class="caret"></b><div id="user-info"><h4><i class="fa fa-gear"></i> <?= Lang::get('lang.settings') ?></h4></div> </a>
+            <ul class="dropdown-menu">
+              <?php if(Auth::user()->admin): ?>
+                <li><a href="<?= URL::to('admin') ?>" class="admin_link_mobile"><i class="fa fa-coffee"></i> <?= Lang::get('lang.admin') ?></a></li>
+              <?php endif; ?>
+              <li><a href="<?= URL::to('user') . '/' . Auth::user()->username; ?>"><i class="fa fa-user"></i> <?= Lang::get('lang.my_profile') ?></a></li>
+              <li><a href="<?= URL::to('logout') ?>" id="user_logout_mobile"><i class="fa fa-power-off"></i> <?= Lang::get('lang.logout') ?></a></li>
+            </ul>
+          </li>
+          <?php endif; ?>
+          <?php if($settings->user_registration || !Auth::guest()): ?>
+          <li><a href="<?= URL::to('upload') ?>" class="upload-btn"><i class="fa fa-cloud-upload"></i> <?= Lang::get('lang.upload') ?></a></li>
+          <?php endif; ?>
+        </ul>
 
         </div>
       </div>
-
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -206,18 +203,49 @@
           </ul>
         </li>
         <?php endif; ?>
-
       </ul>  
 
-
       <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown dropdownNotifi">
+        <?php if(Auth::guest()): ?>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-bell"></i>
+          </a>
+        <?php else: ?>
+          <a href="#" class="dropdown-toggle readNotifi" data-toggle="dropdown">
+            <i class="fa fa-bell"></i>
+              <?php
+                $notification = DB::table('notifications')->where('user_id', '=', Auth::user()->id)->take(10)->get();
+
+                $notice = DB::table('notifications')->where('user_id', '=', Auth::user()->id)->where('is_read','=',0)->get();
+                $count =  count($notice);?>
+                  <span class="notifications"><?php echo $count ?></span>
+          </a>
+          <ul class="dropdown-menu">
+            <?php 
+              foreach ($notice as $value) {?>
+                <li>
+                  <a id="<?php echo $value->id ?>" href="<?php echo $value->url_comment; ?>">
+                  <?php echo $value->content ?>
+                  </a>
+                </li>
+            <?php } 
+              foreach ($notification as $value) {?>
+                <li>
+                  <a id="<?php echo $value->id ?>" href="<?php echo $value->url_comment; ?>">
+                  <?php echo $value->content ?>
+                  </a>
+                </li>
+            <?php } ?>
+          </ul>
+        <?php endif; ?>
+        </li>
         <li><a href="<?= URL::to('/random') ?>" class="random"><i class="fa fa-random"></i></a></li>
       <?php if($settings->user_registration || !Auth::guest()): ?>
         <li><a href="<?= URL::to('upload') ?>" class="upload-btn upload-btn-desktop"><i class="fa fa-cloud-upload"></i> <?= Lang::get('lang.upload') ?></a></li>
       <?php endif; ?>
 
       <?php if(Auth::guest()): ?>
-      
       
           <li class="<?php if(Request::is('login')){ echo 'active'; } ?>"><a href="<?= URL::to('login') ?>" id="login-button-desktop"><?= Lang::get('lang.sign_in') ?></a><div class="nav-border-bottom"></div></li>
           <?php if($settings->user_registration): ?>
@@ -241,9 +269,36 @@
     <?php endif; ?>
     </ul>
 
-
-
   </div><!-- /.navbar-collapse -->
 </div><!-- /.container -->
 </nav>
-
+<style type="text/css">
+  .notifications{
+    margin-top: -7px;
+    display: inline-block;
+    float: right;
+  }
+  .dropdownNotifi .dropdown-menu{
+    display: none;
+    opacity: 1!important;
+    visibility: visible!important;
+  }
+</style>
+<script type="text/javascript">
+  $( document ).ready(function() {
+    $('.dropdownNotifi').on('click', 'a.readNotifi', function(event) {
+      event.stopPropagation();
+      tc = $(this);
+      var ID = tc.attr("id");
+      $.ajax({
+        type: 'POST',
+        url : '/notification',
+        data: {
+        },
+        success: function(response){
+          $('.notifications').hide();
+        }
+      });
+    });
+  });
+</script>

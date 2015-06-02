@@ -52,9 +52,14 @@
 					<img style="display:none" src="<?= Config::get('site.uploads_dir') . '/images/' . str_replace('.gif', '-animation.gif', $item->pic_url) ?>" />
 					<p class="gif-play"><i class="fa fa-play-circle-o"></i></p>
 				</div>
-			<?php else: ?>
-				<a href="<?= URL::to('media') . '/' . $item->slug; ?>" alt="<?= $item->title ?>"><img class="single-media" alt="..." src="<?= Config::get('site.uploads_dir') . '/images/' . $item->pic_url ?>" /></a>
-			<?php endif; ?>
+			<?php else:
+					$str = $item->pic_url;
+					$img = explode(";",$str);
+					foreach ($img as $value) { ?>
+						<a href="<?= URL::to('media') . '/' . $item->slug; ?>" alt="<?= $item->title ?>"><img class="single-media" alt="..." src="<?= Config::get('site.uploads_dir') . '/images/' . $value ?>" /></a>
+						<p></p>
+			<?php 	} 
+				endif; ?>
 	
 		<?php else: ?>
 

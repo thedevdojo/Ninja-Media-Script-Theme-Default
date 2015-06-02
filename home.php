@@ -20,7 +20,7 @@
 	    </div>
 
 	    <div class="pull-right mobile-pull-right">
-		     <form class="navbar-form search-form col-xs-12" role="search" style="margin:0px; padding-top:4px;" action="<?= URL::to('/') ?>" method="GET">
+		    <form class="navbar-form search-form col-xs-12" role="search" style="margin:0px; padding-top:4px;" action="<?= URL::to('/') ?>" method="GET">
 		            <div class="form-group">
 		              <input type="text" class="form-control" name="search" placeholder="<?= Lang::get('lang.search') ?>" style="-webkit-border-radius: 20px; -moz-border-radius: 20px; border-radius: 20px; height:30px;">
 		            	
