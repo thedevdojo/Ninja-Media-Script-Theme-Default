@@ -53,8 +53,18 @@
 					<p class="gif-play"><i class="fa fa-play-circle-o"></i></p>
 				</div>
 			<?php else:
-					$str = $item->pic_url;
-					$img = explode(";",$str);
+					$str1 = $item->pic_url;
+					$str2 = $item->pic_url_multi;
+					$str = $str1 .";". $str2;
+					$link1 =  "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+					$link2 = URL::to('media') . '/' . $item->slug;
+					if ($link1 == $link2) {
+						$img = explode(";",$str);
+					}
+					else{
+						$img = explode(";",$str1);
+					}
+					
 					foreach ($img as $value) { ?>
 						<a href="<?= URL::to('media') . '/' . $item->slug; ?>" alt="<?= $item->title ?>"><img class="single-media" alt="..." src="<?= Config::get('site.uploads_dir') . '/images/' . $value ?>" /></a>
 						<p></p>

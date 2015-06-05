@@ -25,7 +25,7 @@
             <p><input name="title" class="form-control" type="text" id="title" placeholder="<?= Lang::get('lang.title') ?>"></p>
 
             <select name="category_id" id="category_id" class="form-control">
-            <option value="1"><?= Lang::get('lang.select_category') ?></option>
+                <option value="1"><?= Lang::get('lang.select_category') ?></option>
                 <?php foreach($categories as $category): ?>
                     <option value="<?= $category->id ?>"><?= $category->name ?></option>
                 <?php endforeach; ?>
@@ -34,7 +34,7 @@
             <div style="clear:both"></div>
             <div id="img_upload" style="padding-left:100px; background:#f1f1f1; padding:15px; margin-top:15px; margin-bottom:15px;">
                 <i class="fa fa-picture-o" style="font-size:50px; color:#aaa; float:left"></i>
-                <p style="margin-left:65px; margin-bottom:6px;"><input type="file" multiple="true" id="pic_url" name="pic_url[]"/></p>
+                <p style="margin-left:65px; margin-bottom:6px;"><input type="file" id="pic_url" name="pic_url"/></p>
                 <h4 style="margin-left:65px; padding-top:0px;"><?= Lang::get('lang.or_enter_url') ?></h4>
                 <p><input type="text" class="form-control" id="img_url" name="img_url" style="" placeholder="<?= Lang::get('lang.image_url') ?>" /></p> 
             </div>
@@ -42,7 +42,7 @@
             <div id="upload_multiple_image">
                 <div>
                     <span>+ Add Another Image</span>
-                    <input type="file" multiple="true" id="pic_url_multi" accept="image/*" name="pic_url[]"/>
+                    <input type="file" multiple="true" id="pic_url_multi" name="pic_url_multi[]"/>
                     <div id="selectedFiles"></div>
                 </div>
             </div>
@@ -117,6 +117,7 @@
         $('.vid-pic input').change(function(){
             if($(this).attr('id') == 'pic'){
                 $('#img_upload').show();
+                $('#upload_multiple_image').show();
                 $('.drop_container').show();
                 $('#import-fb').show();
                 $('.img-drop').show();
@@ -125,6 +126,7 @@
                 console.log('hit');
                 $('#vid_upload').show();
                 $('#img_upload').hide();
+                $('#upload_multiple_image').hide();
                 $('#import-fb').hide();
                 $('.img-drop').hide();
                 $('.drop_container').hide();
@@ -135,34 +137,31 @@
         $('.submit-media').click(function(){
             $('#media-form').submit();
         });
-
-        //Multiple Image Upload
-        var selDiv = "";
-        document.addEventListener("DOMContentLoaded", init, false);
-        function init() {
-            document.querySelector('#pic_url_multi').addEventListener('change', handleFileSelect, false);
-            selDiv = document.querySelector("#selectedFiles");
-        }
-        function handleFileSelect(e) {
-            if(!e.target.files || !window.FileReader) return;
-            selDiv.innerHTML = "";
-            var files = e.target.files;
-            var filesArr = Array.prototype.slice.call(files);
-            filesArr.forEach(function(f) {
-                var f = files[i];
-                if(!f.type.match("image.*")) {
-                    return;
-                }
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    var html = "<img src=\"" + e.target.result + "\">" + f.name + "<br clear=\"left\"/>";
-                    selDiv.innerHTML += html;               
-                }
-                reader.readAsDataURL(f); 
-            });
-        }
     });
-
 </script>
-
+<script>
+    var selDiv = "";
+    document.addEventListener("DOMContentLoaded", init, false);
+    function init() {
+        document.querySelector('#pic_url_multi').addEventListener('change', handleFileSelect, false);
+        selDiv = document.querySelector("#selectedFiles");
+    }
+    function handleFileSelect(e) {
+        if(!e.target.files || !window.FileReader) return;
+        selDiv.innerHTML = "";
+        var files = e.target.files;
+        var filesArr = Array.prototype.slice.call(files);
+        filesArr.forEach(function(f) {
+            if(!f.type.match("image.*")) {
+                return;
+            }
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var html = "<img src=\"" + e.target.result + "\"><br> " + f.name + "<br><br>";
+                selDiv.innerHTML += html;    
+            }
+            reader.readAsDataURL(f);
+        });
+    }
+</script>
 <?php include('includes/footer.php'); ?>

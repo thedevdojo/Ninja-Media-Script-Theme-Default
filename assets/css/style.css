@@ -84,12 +84,14 @@ body.modal-open{
 }
 #selectedFiles{
 	margin-top: 25px;
-	width: 100%; 
+	width: 100%;
+	overflow: hidden;
+	text-align: center;
 }
 #selectedFiles img {
-	max-width: 125px;
-	max-height: 125px;
-	float: left;
+	max-width: 400px;
+	max-height: 400px;
+	width: 100%;
 	margin-bottom:10px;
 }
 .navbar-fixed-top{
