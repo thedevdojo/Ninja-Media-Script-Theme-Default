@@ -41,7 +41,7 @@
 
             <div id="upload_multiple_image">
                 <div>
-                    <span>+ Add Another Image</span>
+                    <span>+ Add other images</span>
                     <input type="file" multiple="true" id="pic_url_multi" name="pic_url_multi[]"/>
                     <div id="selectedFiles"></div>
                 </div>
