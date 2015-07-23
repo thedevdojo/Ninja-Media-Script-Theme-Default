@@ -12,6 +12,8 @@
 
             <input type="hidden" class="form-control" name="user_id" id="user_id" value="<?= Auth::user()->id ?>" />
 
+            <input type="hidden" value="" name="delete_img" id="delete_img">
+
             <!-- Select between an image or a video -->
             <div class="btn-group vid-pic" data-toggle="buttons">
               <label class="btn btn-radio active">
@@ -40,10 +42,16 @@
             </div>
 
             <div id="upload_multiple_image">
-                <div>
-                    <span>+ Add other images</span>
-                    <input type="file" multiple="true" id="pic_url_multi" name="pic_url_multi[]"/>
-                    <div id="selectedFiles"></div>
+                <div id="maindiv">
+                    <div id="formdiv">
+                        <div class="filediv">
+                            <input name="pic_url_multi[]" type="file" id="pic_url_multi" multiple="true"/>
+                        </div>
+                        <br/>
+                        <div class="divider">
+                            <input type="button" id="add_more" class="upload" value="+ Add another images"/>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -64,7 +72,7 @@
             
             <p><input name="tags" class="form-control" id="tags" placeholder="<?= Lang::get('lang.tags_optional') ?>" /></p>      
             
-            <p>
+            <p style="margin:10px 0">
                 <label for="nsfw"><?= Lang::get('lang.nsfw') ?></label>
 
                 <?php if(isset($item->nsfw)): ?><?php $nsfw = $item->nsfw ?><?php else: ?><?php $nsfw = 0 ?><?php endif; ?>
@@ -72,7 +80,7 @@
                     
             </p>
 
-            <input class="btn btn-color submit-media" type="submit" value="<?= Lang::get('lang.submit') ?>">
+            <input class="btn btn-color submit-media upload" id="upload" type="submit" value="<?= Lang::get('lang.submit') ?>">
 
         </form>
 
@@ -139,29 +147,6 @@
         });
     });
 </script>
-<script>
-    var selDiv = "";
-    document.addEventListener("DOMContentLoaded", init, false);
-    function init() {
-        document.querySelector('#pic_url_multi').addEventListener('change', handleFileSelect, false);
-        selDiv = document.querySelector("#selectedFiles");
-    }
-    function handleFileSelect(e) {
-        if(!e.target.files || !window.FileReader) return;
-        selDiv.innerHTML = "";
-        var files = e.target.files;
-        var filesArr = Array.prototype.slice.call(files);
-        filesArr.forEach(function(f) {
-            if(!f.type.match("image.*")) {
-                return;
-            }
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                var html = "<img src=\"" + e.target.result + "\"><br> " + f.name + "<br><br>";
-                selDiv.innerHTML += html;    
-            }
-            reader.readAsDataURL(f);
-        });
-    }
-</script>
+<script type="text/javascript" src="<?= URL::to('/') ?>/content/themes/default/assets/js/script_upload.js"></script>
+
 <?php include('includes/footer.php'); ?>

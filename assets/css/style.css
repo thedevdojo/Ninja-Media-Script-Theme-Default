@@ -66,26 +66,30 @@ body.modal-open{
 	padding: 30px 0;
 	border: 3px dotted #DDDDDD;
 	position: relative;
+	overflow: hidden;
 }
 #upload_multiple_image>div>span{
 	width: 100%;
 	display: inline-block;
 	text-align: center;
 	position: absolute;
-	top: 18px;
+	top: 32px;
 	z-index: 99;
+	color: #999;
+  	font-size: 15px;
 }
 #upload_multiple_image>div>#pic_url_multi{
 	position: absolute;
 	z-index: 999;
-	top: 18px;
+	top: 0px;
 	opacity: 0;
 	width: 100%;
+	height:100%;
+	cursor:pointer;
 }
 #selectedFiles{
-	margin-top: 25px;
+	margin-top: 50px;
 	width: 100%;
-	overflow: hidden;
 	text-align: center;
 }
 #selectedFiles img {
@@ -93,6 +97,24 @@ body.modal-open{
 	max-height: 400px;
 	width: 100%;
 	margin-bottom:10px;
+}
+#selectedFiles >div{
+	position: relative;
+	display: inline-block;
+}
+#selectedFiles > div > span{
+	position: absolute;
+	max-width: 28px;
+	max-height: 28px;
+	width: 100%;
+	height: 100%;
+	top: -10px;
+	right: -10px;
+	border-radius: 102px;
+	border: 2px solid #fff;
+	background: url(../img/del.png) transparent no-repeat center center;
+	z-index: 99999;
+	cursor: pointer;
 }
 .navbar-fixed-top{
 	box-shadow: 0 0 0px 0px rgba(0,0,0,.3);
@@ -544,6 +566,11 @@ border-bottom-left-radius: 0;
 	max-width:100%;
 	height:auto;
 }
+
+.single-left img.single-media.margin-bottom{
+	margin-bottom:20px;
+}
+
 
 .nav-pills>li>a{
 	background:#dfdfdf;
@@ -2235,7 +2262,7 @@ th a:hover{
 }
 
 .media-separator{
-	border-bottom:1px solid #f5f5f5; 
+	border-bottom:1px solid #f1f1f1; 
 	width:100%;
 	clear:both;
 	display:block;
@@ -3586,3 +3613,117 @@ a.reset_password{
 }
 
 /********** End Newer darker color theme styles **********/
+form#media-form{
+    background-color:white;
+    padding: 40px 20px;
+    box-shadow: 0px 0px 10px;
+    border-radius: 2px;
+}
+#maindiv{
+    width:100%; 
+    margin:10px auto; 
+    padding:10px;
+    font-family: 'Droid Sans', sans-serif;
+}
+#formdiv{
+    width: 100%; 
+    float:left; 
+    text-align: center;
+    padding: 0 20px;
+}
+form#media-form h2{
+	margin-top: 0;
+}
+.upload{
+    background-color:#ee222e;
+    border:1px solid #ee222e;
+    color:#fff;
+    text-shadow: 0 -1px rgba(0, 0, 0, .2);
+    border-radius:5px;
+    padding:10px;
+    text-shadow:1px 1px 0px green;
+    box-shadow: 2px 2px 15px rgba(0,0,0, .75);
+}
+.upload:hover{
+    cursor:pointer;
+    background:#ff3642;
+    border:1px solid #c20b0b;
+    box-shadow: 0px 0px 5px rgba(0,0,0, .75);
+}
+#pic_url_multi{
+    color: green;
+    padding: 5px;
+    background-color: #f9ffe5;
+    background: red;
+    font-size: 0;
+    width: 200px;
+    height: 30px;
+    margin: 0 auto;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    position: relative;
+}
+/*#upload{
+    margin-left: 45px;
+}*/
+.filediv{
+    background: url(../img/add_other_image.png) transparent no-repeat center center;
+    display: inline-block;
+    margin: 10px 0 0;
+}
+#noerror{
+    color:green;
+    text-align: left;
+}
+#error{
+    color:red;
+    text-align: left;
+}
+#img{ 
+    width: 17px;
+    border: none; 
+    height:17px;
+    margin-left: -20px;
+    margin-bottom: 91px;
+}
+
+.abcd{
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    background: #f1f1f1;
+    padding: 15px 0;
+}
+
+.abcd img{
+    height: 300px;
+    width: 400px;
+    padding: 5px;
+    border: 1px solid rgb(232, 222, 189);
+}
+b{
+    color:red;
+}
+#formget{
+    float:right; 
+
+}
+.delete{
+    width: 28px;
+    height: 28px;
+    background: url(../img/delete.png) transparent no-repeat center center;
+    position: absolute;
+    right: -10px;
+    top: 4px;
+    cursor: pointer;
+}
+.divider{
+    width: 100%;
+    margin: 10px auto;
+    border-bottom: 2px dashed #A4AAB0;
+    padding-bottom: 10px;
+}
+#add_more{
+    float: right;
+    margin-top: 30px;
+}

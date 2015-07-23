@@ -65,9 +65,14 @@
 						$img = explode(";",$str1);
 					}
 					
+					$img = array_filter($img);
+
 					foreach ($img as $value) { ?>
-						<a href="<?= URL::to('media') . '/' . $item->slug; ?>" alt="<?= $item->title ?>"><img class="single-media" alt="..." src="<?= Config::get('site.uploads_dir') . '/images/' . $value ?>" /></a>
-						<p></p>
+						<?php if(isset($single) && $single): ?>
+							<img class="single-media margin-bottom" alt="<?= stripslashes($item->title); ?>" src="<?= Config::get('site.uploads_dir') . '/images/' . $value ?>" />
+						<?php else: ?>
+							<a href="<?= URL::to('media') . '/' . $item->slug; ?>" alt="<?= $item->title ?>"><img class="single-media" alt="<?= stripslashes($item->title); ?>" src="<?= Config::get('site.uploads_dir') . '/images/' . $value ?>" /></a>
+						<?php endif; ?>
 			<?php 	} 
 				endif; ?>
 	

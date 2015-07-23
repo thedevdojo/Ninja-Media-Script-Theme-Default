@@ -31,7 +31,7 @@
     <script type="text/javascript" src="<?= URL::to('/') ?>/content/themes/default/assets/js/jquery.sticky.js"></script>
     <script type="text/javascript" src="<?= URL::to('/') ?>/content/themes/default/assets/js/jquery.fitvid.js"></script>
     <script type="text/javascript" src="<?= URL::to('/') ?>/content/themes/default/assets/js/jquery.timeago.js"></script>
-
+    
     <?php if(isset($item->title) && isset($item->pic_url)): ?>
       <meta property="og:title" content="<?= stripslashes($item->title) ?>"/>
       <meta property="og:url" content="<?= Request::url() ?>"/>
@@ -219,7 +219,7 @@
 
                 $notice = DB::table('notifications')->where('user_id', '=', Auth::user()->id)->where('is_read','=',0)->get();
                 $count =  count($notice);?>
-                  <span class="notifications"><?php echo $count ?></span>
+                  <?php if($count > 0): ?><span class="notifications"><?php echo $count ?></span><?php endif; ?>
           </a>
           <ul class="dropdown-menu">
             <?php 
