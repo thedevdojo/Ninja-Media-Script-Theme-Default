@@ -42,6 +42,11 @@
             </div>
 
             <div id="upload_multiple_image">
+                <!-- <div>
+                    <span>+ Add other images</span>
+                    <input type="file" multiple="true" id="pic_url_multi" name="pic_url_multi[]"/>
+                    <div id="selectedFiles"></div>
+                </div> -->
                 <div id="maindiv">
                     <div id="formdiv">
                         <div class="filediv">
@@ -147,6 +152,61 @@
         });
     });
 </script>
+<!-- script>
+    var selDiv = "";
+    var filesArr= [];
+    document.addEventListener("DOMContentLoaded", init, false);
+    function init() {
+        document.querySelector('#pic_url_multi').addEventListener('change', handleFileSelect, false);
+        selDiv = document.querySelector("#selectedFiles");
+    }
+    function handleFileSelect(e) {
+        if(!e.target.files || !window.FileReader) return;
+        //selDiv.innerHTML = "";
+        var files = e.target.files;
+        var filesNew = Array.prototype.slice.call(files);
+
+        if (filesNew != null) {
+            if (filesArr.length == 0) {
+                filesArr = filesNew;
+            } else {
+                //filesArr = filesArr.concat(filesNew);
+                var cf = filesArr.length;
+                for(i=0; i<filesNew.length; i++) {
+                    var newindex = cf + i;
+                    filesArr[newindex] =  filesNew[i];
+                }
+            };
+        };
+        filesNew.forEach(function(f) {
+            if(!f.type.match("image.*")) {
+                return;
+            }
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var html = "<div><img src=\"" + e.target.result + "\"><br> " + f.name + "<br><br><span class='cancel'></span</div>";
+                selDiv.innerHTML += html;
+            }
+            reader.readAsDataURL(f);
+        });
+        var y="";
+        for(i=0;i<filesArr.length;i++){
+            var x = filesArr[i].name;
+            y +=x +';';
+        }
+        console.log(y);
+        var z = $("#pic_url_multi").val(y);
+        console.log(z);       
+
+            /*var charater;
+            var charaters;
+            charater = filesArr.;
+            charaters = filesArr.join(";");
+            console.log(charaters);
+            var lol = document.getElementById('pic_url_multi').value;
+            alert(lol);*/
+    }
+</script -->
 <script type="text/javascript" src="<?= URL::to('/') ?>/content/themes/default/assets/js/script_upload.js"></script>
 
 <?php include('includes/footer.php'); ?>

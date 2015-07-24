@@ -21,7 +21,7 @@ $(document).ready(function() {
                     return function(e) {
                         abc += 1;
                         noExecute[abc] = 0;
-                        crrfile.before("<div id='abcd"+ abc +"' class='abcd'><img id='previewimg" + abc + "' class='img"+ abc + "' src='"+e.target.result+"' filesize='"+filesize+"' filename='"+filename+"'/><span class='delete' alt='"+abc+"'></span> </div>");
+                        crrfile.before("<div id='abcd"+ abc +"' class='abcd'><img id='previewimg" + abc + "' class='img"+ abc + "' src='"+e.target.result+"' filesize='"+filesize+"' filename='"+filename+"'/><span class='delete' alt='"+abc+"'></span><br><p class='imgName'>"+filename+"</p></div>");
 
                         $(".delete").click(function() {
                             var noImgDel = $(this).attr('alt');
